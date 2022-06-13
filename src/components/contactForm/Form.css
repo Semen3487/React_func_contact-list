@@ -1,0 +1,36 @@
+.main-inner-form {
+  margin: 10px;
+  width: 100%;
+  background-color: rgb(181, 200, 194);
+}
+
+.form-item {
+  margin: 15px 2px;
+}
+
+input {
+  width: 85%;
+  min-height: 50px;
+  font-size: 1.1em;
+  letter-spacing: 1.5px;
+  text-indent: 5%;
+  outline: transparent;
+  border-color: transparent;
+}
+
+.input-group {
+  margin-left: 10px;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: white;
+  border: solid 3px white;
+  background-color: rgb(225, 27, 93);
+}
+
+.input-group:hover {
+  cursor: pointer;
+}
+
+form > button {
+  margin-top: 55px;
+}
