@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { 
+  // useEffect,
+   useState } from 'react';
 import './App.css';
 import Form from './components/contactForm/Form';
+import ContainsName from './components/containsName/ContainsName';
 import List from './components/nameList/List';
 import initialState from './model/initial-contact';
 import initFormState from './model/initial-form';
@@ -12,19 +15,21 @@ function App() {
 
   const [formState, setFormState] = useState(initFormState);
 
+  const [arrList, setArrList] = useState(toListItem.length);
+
   function saveToStorage(contacts) {
     localStorage.setItem('Contact List', JSON.stringify(contacts));
   };
 
   //* useEffect працює асинхронно
-  useEffect(() => {
-    const contacts = JSON.parse(localStorage.getItem('Contact List'));
-    if (!contacts){
-      setToListItem(initialState);
-    } else {
-      setToListItem(contacts);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const contacts = JSON.parse(localStorage.getItem('Contact List'));
+  //   if (!contacts){
+  //     setToListItem(initialState);
+  //   } else {
+  //     setToListItem(contacts);
+  //   };
+  // }, []);
 
   function saveContact(contact) {
     if (!contact.id) {
@@ -39,6 +44,7 @@ function App() {
     const newContactList = [...toListItem, contact];
     setToListItem(newContactList);
     setFormState(initFormState);
+    setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
 
@@ -46,12 +52,14 @@ function App() {
     const newContactList = toListItem.map((item) => item.id === contact.id ? contact : item);
     setToListItem(newContactList);
     setFormState(initFormState);
+    setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
   
   function deleteContactName(id) {
     const newContactList = [...toListItem.filter((contact) => contact.id !== id)];
     setToListItem(newContactList);
+    setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
 
@@ -67,9 +75,7 @@ function App() {
     <div className='container'>
       <div className='content'>
           <header>
-            <h1>
-              Contact list
-            </h1>
+            <ContainsName contacts={arrList} />
           </header>
           <main>
             <List

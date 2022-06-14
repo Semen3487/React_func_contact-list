@@ -25,16 +25,13 @@ body {
 .content {
   padding: 10px;
   width: 650px;
+  user-select: none;
 
   border: solid 2px white;
 }
 
 header {
   background-color: var(--elem-bgc);
-}
-
-h1 {
-  padding: 10px;
 }
 
 main {
@@ -56,4 +53,9 @@ button {
 
 button:hover {
   cursor: pointer;
+}
+
+footer {
+  background-color: var(--elem-bgc);
+  padding: 30px;
 }
