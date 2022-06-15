@@ -9,8 +9,8 @@ function Item({contact, onDelete, onEdit}) {
     onDelete(contact.id);
   };
   
-  function onContactEdit(event) {
-    event.stopPropagation();
+  function onContactEdit() {
+    // event.stopPropagation();
     onEdit(contact);
   };
 

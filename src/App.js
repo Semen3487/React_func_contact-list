@@ -15,7 +15,7 @@ function App() {
 
   const [formState, setFormState] = useState(initFormState);
 
-  const [arrList, setArrList] = useState(toListItem.length);
+  // const [arrList, setArrList] = useState(toListItem.length);
 
   function saveToStorage(contacts) {
     localStorage.setItem('Contact List', JSON.stringify(contacts));
@@ -44,7 +44,7 @@ function App() {
     const newContactList = [...toListItem, contact];
     setToListItem(newContactList);
     setFormState(initFormState);
-    setArrList(newContactList.length);
+    // setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
 
@@ -52,14 +52,14 @@ function App() {
     const newContactList = toListItem.map((item) => item.id === contact.id ? contact : item);
     setToListItem(newContactList);
     setFormState(initFormState);
-    setArrList(newContactList.length);
+    // setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
   
   function deleteContactName(id) {
     const newContactList = [...toListItem.filter((contact) => contact.id !== id)];
     setToListItem(newContactList);
-    setArrList(newContactList.length);
+    // setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
 
@@ -75,7 +75,7 @@ function App() {
     <div className='container'>
       <div className='content'>
           <header>
-            <ContainsName contacts={arrList} />
+            <ContainsName contacts={toListItem.length} />
           </header>
           <main>
             <List

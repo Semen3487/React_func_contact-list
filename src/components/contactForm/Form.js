@@ -13,13 +13,19 @@ function Form({initFormState, onSubmit, onDelete}) {
     });
   };
 
+  // function onSubmitForm(event) {
+  //   event.preventDefault();
+  //   onSubmit(contact);
+  //   setContact(initFormState);
+  // };
+
   function onSubmitForm(event) {
     event.preventDefault();
     onSubmit({
       ...contact,
     });
     setContact({
-      ...initFormState,
+       ...initFormState,
     });
   };
 
