@@ -14,6 +14,19 @@ function Item({contact, onDelete, onEdit}) {
     onEdit(contact);
   };
 
+  // function Item(props) {
+
+  //   function onContactDelete(event) {
+  //     event.stopPropagation();
+  //     props.onDelete(contact.id);
+  //   };
+    
+  //   function onContactEdit() {
+  //     // event.stopPropagation();
+  //     props.onEdit(contact);
+  //   };
+  // }
+  
   return (
     <div className='list-item' 
            onDoubleClick={onContactEdit}

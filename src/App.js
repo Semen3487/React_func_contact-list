@@ -1,5 +1,5 @@
 import React, { 
-  // useEffect,
+  useEffect,
    useState } from 'react';
 import './App.css';
 import Form from './components/contactForm/Form';
@@ -7,6 +7,7 @@ import ContainsName from './components/containsName/ContainsName';
 import List from './components/nameList/List';
 import initialState from './model/initial-contact';
 import initFormState from './model/initial-form';
+import contactListService from './contactList-service.js';
 
 
 function App() {
@@ -15,13 +16,17 @@ function App() {
 
   const [formState, setFormState] = useState(initFormState);
 
-  // const [arrList, setArrList] = useState(toListItem.length);
-
   function saveToStorage(contacts) {
     localStorage.setItem('Contact List', JSON.stringify(contacts));
   };
 
   //* useEffect працює асинхронно
+
+  useEffect(() => {
+    contactListService.get('/')
+      .then((response) => console.log(response))
+  },[]);
+
   // useEffect(() => {
   //   const contacts = JSON.parse(localStorage.getItem('Contact List'));
   //   if (!contacts){
@@ -44,7 +49,6 @@ function App() {
     const newContactList = [...toListItem, contact];
     setToListItem(newContactList);
     setFormState(initFormState);
-    // setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
 
@@ -52,14 +56,12 @@ function App() {
     const newContactList = toListItem.map((item) => item.id === contact.id ? contact : item);
     setToListItem(newContactList);
     setFormState(initFormState);
-    // setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
   
   function deleteContactName(id) {
     const newContactList = [...toListItem.filter((contact) => contact.id !== id)];
     setToListItem(newContactList);
-    // setArrList(newContactList.length);
     saveToStorage(newContactList);
   };
 
