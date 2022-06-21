@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Form.css';
 
 
-function Form({ initFormState, onSubmit, onDelete }) {
+function Form({initFormState, onSubmit, onDelete}) {
 
   const [contact, setContact] = useState(initFormState);
 
@@ -13,30 +13,12 @@ function Form({ initFormState, onSubmit, onDelete }) {
     });
   };
 
-  // function createNewContact() {
-  //   return{
-  //     id: null,
-  //     fName: '',
-  //     lName: '',
-  //     email: '',
-  //     phone: '',
-  //   }              
-  // }
-
-  // function onSubmitForm(event) {
-  //   event.preventDefault();
-  //   onSubmit(contact);
-  //   setContact(createNewContact());
-  // };
-
   function onSubmitForm(event) {
     event.preventDefault();
     onSubmit({
-      ...contact,
+      ...contact
     });
-    setContact({
-      ...initFormState,
-    });
+    setContact(initFormState);
   };
 
   function toClearField(event) {
@@ -47,11 +29,10 @@ function Form({ initFormState, onSubmit, onDelete }) {
     });
   };
 
-  function toDeleteContact() {
+  function toDeleteContact(event) {
+    event.preventDefault();
     onDelete(contact.id);
-    setContact({
-      ...initFormState,
-    });
+    setContact(initFormState);
   };
 
   return (

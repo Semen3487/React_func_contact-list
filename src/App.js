@@ -16,25 +16,11 @@ function App() {
 
   const [formState, setFormState] = useState(initFormState);
 
-  function saveToStorage(contacts) {
-    localStorage.setItem('Contact List', JSON.stringify(contacts));
-  };
-
   //* useEffect працює асинхронно
-
   useEffect(() => {
     contactListService.get('/')
-      .then((response) => console.log(response))
+      .then(({data}) => setToListItem(data))
   },[]);
-
-  // useEffect(() => {
-  //   const contacts = JSON.parse(localStorage.getItem('Contact List'));
-  //   if (!contacts){
-  //     setToListItem(initialState);
-  //   } else {
-  //     setToListItem(contacts);
-  //   };
-  // }, []);
 
   function saveContact(contact) {
     if (!contact.id) {
@@ -46,23 +32,30 @@ function App() {
 
   function addContactName(contact) {
     contact.id = Date.now();
-    const newContactList = [...toListItem, contact];
-    setToListItem(newContactList);
+    contactListService.post('/', contact)
+      .then(({data}) => {
+        const newContactList = [...toListItem, data];
+        setToListItem(newContactList); 
+      });
     setFormState(initFormState);
-    saveToStorage(newContactList);
   };
 
   function updateContactName(contact) {
-    const newContactList = toListItem.map((item) => item.id === contact.id ? contact : item);
-    setToListItem(newContactList);
+    contactListService.put(`/${contact.id}`, contact)
+    .then(({data}) => {
+      const newContactList = toListItem.map((item) => item.id === contact.id ? data : item);
+      setToListItem(newContactList);
+    })
+    .catch((error) => console.log(error));
+    
     setFormState(initFormState);
-    saveToStorage(newContactList);
   };
   
   function deleteContactName(id) {
+    contactListService.delete(`/${id}`);
     const newContactList = [...toListItem.filter((contact) => contact.id !== id)];
     setToListItem(newContactList);
-    saveToStorage(newContactList);
+    setFormState(initFormState);
   };
 
   function selectContact(contact) {
